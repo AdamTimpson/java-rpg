@@ -8,6 +8,8 @@ public class Sprite {
 	
 	private SpriteSheet sheet;
 	
+	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles); 
+	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		this.SIZE = size;
 		
@@ -15,7 +17,7 @@ public class Sprite {
 		
 		this.x = x * SIZE;
 		this.y = y * SIZE;
-		this.sheet = sheet; 
+		this.sheet = sheet;
 		
 		load();
 	}
@@ -26,6 +28,10 @@ public class Sprite {
 				pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y)* sheet.SIZE];
 			}
 		}
+	}
+	
+	public int getSize() {
+		return this.SIZE;
 	}
 	
 }

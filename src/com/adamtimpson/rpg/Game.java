@@ -50,6 +50,7 @@ public class Game extends Canvas implements Runnable {
     	game.frame.setLocationRelativeTo(null);
     	game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	game.frame.setVisible(true);
+    	game.requestFocus();
     	
     	game.start();
     }
@@ -75,7 +76,7 @@ public class Game extends Canvas implements Runnable {
     	key.update();
     	
     	if(key.up) y--;
-    	if(key.down) y+=10;
+    	if(key.down) y++;
     	if(key.left) x--;
     	if(key.right) x++; 
     	
