@@ -10,6 +10,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import com.adamtimpson.rpg.graphics.Screen;
+import com.adamtimpson.rpg.input.Keyboard;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +20,8 @@ public class Game extends Canvas implements Runnable {
 
     private JFrame frame; 
     private Thread thread;
+    private Keyboard key; 
+    
     private boolean running = false;
     
     private Screen screen;
@@ -33,6 +36,9 @@ public class Game extends Canvas implements Runnable {
         screen = new Screen(WIDTH, HEIGHT);
         
         frame = new JFrame();
+        key = new Keyboard();
+        
+        addKeyListener(key);
     }
 
     public static void main(String[] args) {
@@ -68,6 +74,8 @@ public class Game extends Canvas implements Runnable {
     public void update() {
     	x++;
 //    	y++;
+    	
+    	key.update();
     }
     
     public void render() {
