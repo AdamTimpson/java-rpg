@@ -1,2 +1,3 @@
 # java-rpg
-An RPG
+
+An RPG written in Java
