@@ -6,7 +6,11 @@ public class Screen {
 
 	private int width, height;
 	public int[] pixels;
-	public int[] tiles = new int[64 * 64];
+	
+	private final int MAP_SIZE = 64;
+	private final int MAP_SIZE_MASK = MAP_SIZE - 1;
+	
+	public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
 	
 	private Random random = new Random();
 
@@ -16,7 +20,7 @@ public class Screen {
 
 		pixels = new int[width * height];
 		
-		for(int i = 0; i < (64 * 64); i++) {
+		for(int i = 0; i < (MAP_SIZE * MAP_SIZE); i++) {
 			tiles[i] = random.nextInt(0xffffff);
 		}
 
@@ -28,19 +32,21 @@ public class Screen {
 		}
 	}
 
-	public void render() {
+	public void render(int xOffset, int yOffset) {
 		for (int y = 0; y < height; y++) {
-			if (y < 0 || y >= height) {
-				break;
-			}
+			int yy = y + yOffset;
+//			if (yy < 0 || yy >= height) {
+//				break;
+//			}
 			
 			for (int x = 0; x < width; x++) {
-				if (x < 0 || x >= width) {
-					break;
-				}
+				int xx = x + xOffset;
+//				if (xx < 0 || xx >= width) {
+//					break;
+//				}
 				
-				int tileIndex = (x >> 5) + (y >> 5) * 64; // x >> 4 = x * 2^4 = x * (2*2*2*2) = x * 16
-				pixels[y + x * width] = tiles[tileIndex];
+				int tileIndex = ((xx >> 4) & MAP_SIZE_MASK) + ((yy >> 4) & MAP_SIZE_MASK) * MAP_SIZE; // x >> 4 = x * 2^4 = x * (2*2*2*2) = x * 16
+				pixels[x + y * width] = tiles[tileIndex];
 			}
 		}
 	}
